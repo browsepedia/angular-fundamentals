@@ -1,0 +1,12 @@
+div {
+    display: flex;
+    flex-direction: column;
+
+    & > app-greeting {
+        margin-bottom: 16px;
+    }
+}
+
+:host {
+    background-color: cadetblue;
+}

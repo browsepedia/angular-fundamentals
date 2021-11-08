@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title> Greeting: {{greeting}}</mat-card-title>
+  <mat-card-subtitle> Index {{greetingService.index}}</mat-card-subtitle>
+  <mat-card-content>
+    <ng-content></ng-content>
+    <ng-content select="[footer]"></ng-content>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="onClick()">Click</button>
+  </mat-card-actions>
+</mat-card>

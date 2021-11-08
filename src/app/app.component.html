@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <button mat-icon-button routerLink="/">
+    <mat-icon>home</mat-icon>
+  </button>
+  <span>My Application</span>
+
+
+
+  <button mat-button [disabled]="!hasPermission" routerLinkActive="active-link"
+          routerLink="/users"
+          [routerLinkActiveOptions]="{exact: true}">Users</button>
+
+  <button mat-button [disabled]="!hasPermission" routerLink="/users/details"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{exact: true}">User Details</button>
+
+  <button mat-button routerLink="/users/roles">User Roles</button>
+
+  <button mat-button routerLink="/departments/list">Departments</button>
+
+</mat-toolbar>
+
+<mat-slide-toggle (change)='onAllowAccessChange($event)'>Allow Access
+</mat-slide-toggle>
+
+<ul>
+  <li *ngFor='let num of numbers$ | async'>{{num}}</li>
+</ul>
+
+<router-outlet></router-outlet>

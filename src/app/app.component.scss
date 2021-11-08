@@ -1,0 +1,12 @@
+div {
+    display: flex;
+
+    & > app-greeting-group {
+        flex-grow: 1;
+        padding: 8px;
+    }
+}
+
+mat-slide-toggle {
+    margin: 24px;
+}

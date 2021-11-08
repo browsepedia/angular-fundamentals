@@ -1,0 +1,8 @@
+<div>
+  <app-greeting *ngFor='let greeting of greetings'>
+    <h4>Hello content projection</h4>
+    <footer footer>test footer</footer>
+  </app-greeting>
+
+  <button mat-button (click)='add.emit()'>Add new greeting</button>
+</div>
