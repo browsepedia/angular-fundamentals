@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-label>Input</mat-label>
+  <input matInput [formControl]="filterCtrl">
+</mat-form-field>
+
+<app-user-list [users]='filteredUsers$ | async' (userEdit)="onUserEdit($event)">
+</app-user-list>

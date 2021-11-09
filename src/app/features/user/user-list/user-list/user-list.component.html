@@ -1,0 +1,16 @@
+<mat-list role="list">
+  <ng-container *ngFor='let user of users'>
+    <mat-list-item role="listitem">
+      <div class="user-list-item">
+        <span>
+          {{user.name}}
+        </span>
+
+        <button mat-icon-button color='accent' (click)="userEdit.emit(user)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { CanSeeUserGuard } from 'src/app/can-see-user.guard';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListContainerComponent } from './user-list/user-list-container/user-list-container.component';
 import { UserRolesComponent } from './user-roles/user-roles.component';
 import { UserComponent } from './user.component';
 
@@ -13,12 +13,11 @@ const routes: Route[] = [
     children: [
       {
         path: 'list',
-        component: UserListComponent,
+        component: UserListContainerComponent,
       },
       {
-        path: 'details',
+        path: 'details/:userId',
         canActivate: [CanSeeUserGuard],
-
         component: UserDetailsComponent,
       },
       {
