@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { User } from '../user.model';
 
@@ -10,41 +10,30 @@ import { User } from '../user.model';
 })
 export class UserFormComponent {
   constructor() {
-    this.form.valueChanges.pipe(debounceTime(500)).subscribe(console.log);
+    // this.form.valueChanges.pipe(debounceTime(500)).subscribe(console.log);
   }
+
+  @ViewChild(NgForm) public form!: NgForm;
 
   @Input() public set user(user: User) {
-    this.form.patchValue(user, { emitEvent: false });
+    // this.form.patchValue(user, { emitEvent: false });
+    this.formValue = user;
   }
 
-  public form = new FormGroup({
-    name: new FormControl('', Validators.minLength(3)),
-    email: new FormControl('', Validators.required),
-    username: new FormControl('', Validators.required),
-  });
+  public formValue!: User;
 
-  public get isValid(): boolean {
-    return this.form.valid;
+  logUser() {
+    this.formValue.name = 'Vasile popa';
   }
 
-  public get nameMinlengthError(): boolean {
-    const control = this.form.get('name');
-    if (control?.errors) {
-      return control.errors['minlength'];
-    }
-
-    return false;
+  onNameChange(event: Event) {
+    const element = event.target as HTMLInputElement;
+    console.log(element.value);
   }
 
-  public get nameMinlengthErrorMessage() {
-    if (this.nameMinlengthError) {
-      const control = this.form.get('name') as FormControl;
-      const error = control.errors && control.errors['minlength'];
-      return error
-        ? `Minlength is ${error.requiredLength}, currently at ${error.actualLength}`
-        : '';
-    }
-
-    return '';
-  }
+  // public form = new FormGroup({
+  //   name: new FormControl('', Validators.required),
+  //   email: new FormControl('', Validators.required),
+  //   username: new FormControl('', Validators.required),
+  // });
 }

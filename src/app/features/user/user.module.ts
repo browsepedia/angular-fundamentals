@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FilterUsersPipe } from './user-list/filter-users.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListContainerComponent } from './user-list/user-list-container/user-list-container.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -23,6 +23,7 @@ import { UserFormComponent } from './user-form/user-form.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
