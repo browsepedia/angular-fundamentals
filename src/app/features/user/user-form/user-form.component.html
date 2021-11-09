@@ -1,0 +1,25 @@
+<form [formGroup]='form'>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName='name' />
+    <mat-error *ngIf="nameMinlengthError">
+      {{nameMinlengthErrorMessage}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName='email' />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName='username' />
+    <mat-error>Required</mat-error>
+  </mat-form-field>
+
+  {{form.errors | json}}
+
+  <button mat-raised-button [disabled]='form.invalid'>Submit</button>
+</form>

@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserListContainerComponent } from './user-list/user-list-container/user-list-container.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { MatCardModule } from '@angular/material/card';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
   ],
   declarations: [
     UserComponent,
@@ -30,6 +33,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     UserListContainerComponent,
     FilterUsersPipe,
     UserDetailsComponent,
+    UserFormComponent,
   ],
 })
 export class UserModule {}
