@@ -1,26 +1,26 @@
-<form #form='ngForm'>
+<form [formGroup]="form">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input required matInput [(ngModel)]='formValue.name' name="name"
-           (input)="onNameChange($event)" #nameInput='matInput' />
+    <input matInput formControlName='name' #nameInput />
     <mat-error>
       Required
     </mat-error>
   </mat-form-field>
 
+  {{form.get('name')?.errors | json}}
 
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]='formValue.email' name="email" />
+    <input matInput formControlName='email' />
     <mat-error>Required</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]='formValue.username' name="username" />
+    <input matInput formControlName='username' />
     <mat-error>Required</mat-error>
   </mat-form-field>
 
   <button mat-raised-button [disabled]='form.invalid'
-          (click)='logUser()'>Submit</button>
+          (click)='submitForm()'>Submit</button>
 </form>
