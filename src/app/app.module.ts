@@ -14,6 +14,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CanSeeUserGuard } from './can-see-user.guard';
 import { DoublePipe } from './double.pipe';
 
+import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent, HomePageComponent, DoublePipe],
   exports: [AppComponent],
@@ -27,6 +30,8 @@ import { DoublePipe } from './double.pipe';
     MatButtonModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatMenuModule,
+    HttpClientModule,
   ],
   providers: [CanSeeUserGuard],
   bootstrap: [AppComponent],

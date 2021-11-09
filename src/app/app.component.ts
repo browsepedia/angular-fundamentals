@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { PermissionService } from './permission.service';
 
@@ -11,30 +11,10 @@ import { PermissionService } from './permission.service';
 })
 export class AppComponent {
   constructor(private _permissionService: PermissionService) {
-    this._permissionService.permission$.subscribe(
-      (hasPermission: boolean) => (this.hasPermission = hasPermission)
-    );
-
-    this.numbers$ = of([1, 2, 3, 4]);
+    this.permission$ = this._permissionService.permission$;
   }
 
-  public title: string = 'Hello World';
-  public numberOfInstances = 0;
-
-  public numbers$!: Observable<number[]>;
-
-  public hasPermission = true;
-
-  public onGreetingClick(title: string): void {}
-
-  public onAddGreeting() {
-    this.numberOfInstances++;
-  }
-
-  public num = {
-    firstName: 'Vasile',
-    lastName: 'Popa',
-  };
+  public permission$: Observable<boolean> | null = null;
 
   public onAllowAccessChange(event: MatSlideToggleChange) {
     this._permissionService.setPermission(event.checked);

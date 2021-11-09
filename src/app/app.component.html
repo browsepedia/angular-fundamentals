@@ -1,30 +1,33 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="{permission: permission$ | async} as context">
   <button mat-icon-button routerLink="/">
     <mat-icon>home</mat-icon>
   </button>
-  <span>My Application</span>
 
+  <mat-slide-toggle [checked]='permission$ | async'
+                    (change)='onAllowAccessChange($event)'>
+    Allow Access
+  </mat-slide-toggle>
 
+  <button [disabled]="!context.permission" mat-button
+          [matMenuTriggerFor]="menu">Users</button>
 
-  <button mat-button [disabled]="!hasPermission" routerLinkActive="active-link"
-          routerLink="/users"
-          [routerLinkActiveOptions]="{exact: true}">Users</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [disabled]="!context.permission"
+            routerLink="/users/details" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">User Details</button>
 
-  <button mat-button [disabled]="!hasPermission" routerLink="/users/details"
-          routerLinkActive="active-link"
-          [routerLinkActiveOptions]="{exact: true}">User Details</button>
+    <button mat-menu-item [disabled]="!context.permission"
+            routerLink="/users/roles">User Roles</button>
 
-  <button mat-button routerLink="/users/roles">User Roles</button>
+    <button mat-menu-item [disabled]="!context.permission"
+            routerLink="/users/list">User List</button>
+
+  </mat-menu>
 
   <button mat-button routerLink="/departments/list">Departments</button>
 
 </mat-toolbar>
 
-<mat-slide-toggle (change)='onAllowAccessChange($event)'>Allow Access
-</mat-slide-toggle>
 
-<ul>
-  <li *ngFor='let num of numbers$ | async'>{{num}}</li>
-</ul>
 
 <router-outlet></router-outlet>

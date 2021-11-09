@@ -5,8 +5,7 @@ import { PermissionService } from 'src/app/permission.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  template: `<router-outlet></router-outlet>`,
 })
 export class UserComponent implements OnInit, OnDestroy {
   constructor(
