@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { CanSeeUserGuard } from 'src/app/can-see-user.guard';
+import { CanSeeUserGuard } from 'src/app/core/can-see-user.guard';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserListContainerComponent } from './user-list/user-list-container/user-list-container.component';
 import { UserRolesComponent } from './user-roles/user-roles.component';

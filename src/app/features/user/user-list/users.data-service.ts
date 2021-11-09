@@ -6,16 +6,14 @@ import { User } from '../user.model';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class UserDataService {
   constructor(private _http: HttpClient) {}
 
   public fetchUsers(): Observable<User[]> {
-    return this._http.get<User[]>('https://jsonplaceholder.typicode.com/users');
+    return this._http.get<User[]>('users');
   }
 
   public fetchUserById(userId: number): Observable<User> {
-    return this._http.get<User>(
-      `https://jsonplaceholder.typicode.com/users/${userId}`
-    );
+    return this._http.get<User>(`users/${userId}`);
   }
 }

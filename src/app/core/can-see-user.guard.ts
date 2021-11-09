@@ -17,7 +17,7 @@ type CanActivateResult =
 
 @Injectable()
 export class CanSeeUserGuard implements CanActivate {
-  constructor(private _service: PermissionService, private router: Router) {}
+  constructor(private _service: PermissionService) {}
 
   public canActivate(
     route: ActivatedRouteSnapshot,

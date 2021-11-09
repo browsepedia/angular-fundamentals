@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
@@ -15,11 +17,26 @@ import { User } from '../user.model';
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent {
-  constructor(_builder: FormBuilder) {
+  constructor(private _builder: FormBuilder) {
     this.form = _builder.group({
-      name: ['', MinLengthValidator(5)],
+      name: ['', Validators.required],
       email: ['', Validators.required],
       username: ['', Validators.required],
+      password: _builder.group(
+        {
+          password: ['', Validators.required],
+          confirm: ['', Validators.required],
+        },
+        { validators: ConfirmPassword }
+      ),
+      roles: _builder.array([
+        _builder.group({
+          role: ['Administrator', Validators.required],
+        }),
+        _builder.group({
+          role: ['Angajat', Validators.required],
+        }),
+      ]),
     });
 
     this.form.valueChanges.pipe(debounceTime(500)).subscribe(console.log);
@@ -36,33 +53,35 @@ export class UserFormComponent {
     console.log(this.form.getRawValue());
   }
 
+  public get passwordFormGroup(): FormGroup {
+    return this.form.get('password') as FormGroup;
+  }
+
+  public get rolesControls(): FormGroup[] {
+    const rolesCtrl = this.form.get('roles') as FormArray;
+    return rolesCtrl.controls as FormGroup[];
+  }
+
   public form!: FormGroup;
+
+  addRole() {
+    this.rolesControls.push(
+      this._builder.group({
+        role: ['Manager', Validators.required],
+      })
+    );
+  }
 }
 
-const MinLengthValidator = (minLength: number): ValidatorFn => {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    if (
-      control.value &&
-      typeof control.value === 'string' &&
-      control.value.length < minLength
-    ) {
-      return {
-        requiredLength: minLength,
-        actualLength: control.value.length,
-      };
-    }
-
-    return null;
-  };
-};
-
-const RequiredValidator: ValidatorFn = (
+const ConfirmPassword: ValidatorFn = (
   control: AbstractControl
 ): { [key: string]: any } | null => {
-  if (!control.value) {
+  const passwordCtrl = control.get('password') as FormControl;
+  const confirmCtrl = control.get('confirm') as FormControl;
+
+  if (passwordCtrl && confirmCtrl && passwordCtrl.value !== confirmCtrl.value) {
     return {
-      required: true,
-      minLength: true,
+      match: false,
     };
   }
 

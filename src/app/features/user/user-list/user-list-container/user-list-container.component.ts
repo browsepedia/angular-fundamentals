@@ -1,44 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  combineLatest,
-  debounceTime,
-  map,
-  Observable,
-  of,
-  startWith,
-} from 'rxjs';
+import { MY_INJECTION_TOKEN } from '@core/core.module';
+import { debounceTime, Observable, of } from 'rxjs';
 import { User } from '../../user.model';
-import { UsersService } from '../users.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-list-container',
   templateUrl: './user-list-container.component.html',
   styleUrls: ['./user-list-container.component.scss'],
 })
-export class UserListContainerComponent implements OnInit {
-  constructor(private _service: UsersService, private _router: Router) {
-    const users$ = this._service.fetchUsers();
+export class UserListContainerComponent {
+  constructor(
+    private _service: UserService,
+    private _router: Router,
+    @Inject(MY_INJECTION_TOKEN) test: any
+  ) {
+    this._service.getAll();
+    this.filteredUsers$ = this._service.filteredUsers$;
 
-    const filter$: Observable<string> = this.filterCtrl.valueChanges.pipe(
-      startWith(''),
-      debounceTime(500)
-    );
+    this.filterCtrl.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((filter: string) => this._service.setFilter(filter));
 
-    this.filteredUsers$ = combineLatest([users$, filter$]).pipe(
-      map(([users, filter]) =>
-        users.filter(
-          (user) => user.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-        )
-      )
-    );
+    console.log(test);
   }
 
   public filteredUsers$: Observable<User[]> = of([]);
   public filterCtrl = new FormControl();
-
-  ngOnInit() {}
 
   onUserEdit(user: User): void {
     this._router.navigateByUrl(`/users/details/${user.id}`);

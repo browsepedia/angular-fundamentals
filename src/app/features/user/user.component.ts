@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PermissionService } from 'src/app/permission.service';
+import { PermissionService } from '@core';
 
 @Component({
   selector: 'app-user',

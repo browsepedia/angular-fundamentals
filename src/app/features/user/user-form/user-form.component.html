@@ -21,6 +21,29 @@
     <mat-error>Required</mat-error>
   </mat-form-field>
 
+  <ng-container [formGroup]="passwordFormGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input type='password' matInput formControlName='password' />
+      <mat-error>Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input type='password' matInput formControlName='confirm' />
+      <mat-error>Required</mat-error>
+    </mat-form-field>
+  </ng-container>
+
+  <div *ngFor="let control of rolesControls; let index = index">
+    <mat-form-field [formGroup]='control'>
+      <mat-label>Role</mat-label>
+      <input matInput formControlName='role' />
+    </mat-form-field>
+  </div>
+
+  <button (click)="addRole()" mat-raised-button>Add Role</button>
+
   <button mat-raised-button [disabled]='form.invalid'
           (click)='submitForm()'>Submit</button>
 </form>

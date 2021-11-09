@@ -3,5 +3,6 @@
   <input matInput [formControl]="filterCtrl">
 </mat-form-field>
 
-<app-user-list [users]='filteredUsers$ | async' (userEdit)="onUserEdit($event)">
+<app-user-list class="blue-theme" [users]='filteredUsers$ | async'
+               (userEdit)="onUserEdit($event)">
 </app-user-list>

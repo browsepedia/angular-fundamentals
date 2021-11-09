@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Observable } from 'rxjs';
 
-import { PermissionService } from './permission.service';
+import { PermissionService } from './core/permission.service';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { CanSeeUserGuard } from './can-see-user.guard';
+import { CanSeeUserGuard } from './core/can-see-user.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Route[] = [
